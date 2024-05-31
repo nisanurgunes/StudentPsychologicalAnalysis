@@ -1,0 +1,41 @@
+﻿@model EntityLayer.Concrete.Student
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Öğrenci Kaydı</h1>
+
+<br />
+@using (Html.BeginForm("AddStudent", "Student", FormMethod.Post)) 
+{
+<div class="form-group">
+    @Html.Label("Kişi Adı")
+    @Html.TextBoxFor(x => x.StudentName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.StudentName, null, new { @class = "text-danger" })
+    <br />
+    @Html.Label("Kişi Soyadı")
+    @Html.TextBoxFor(x => x.StudentSurname, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.StudentSurname)
+    <br />
+    @Html.Label("Kişi Kullanıcı Adı")
+    @Html.TextBoxFor(x => x.StudentUserName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.StudentUserName)
+    <br />
+    @Html.Label("Kişi Şifresi")
+    @Html.TextBoxFor(x => x.StudentPassword, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.StudentPassword)
+    <br />
+    @Html.Label("Kişi Görsel Linki")
+    @Html.TextBoxFor(x => x.StudentImage, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.StudentImage)
+    <br />
+    @Html.Label("Kişi Sınıf")
+    @Html.TextBoxFor(x => x.StudentClass, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.StudentClass)
+   
+    <button class="btn btn-info">Yeni Öğrenci Kaydı Ekle</button>
+
+
+</div>
+}
