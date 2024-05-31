@@ -1,12 +1,6 @@
-# Asp.Net Mvc ile Teknoji Sözlük Uygulaması Geliştirme                        
+# Asp.Net Mvc ve Python ile öğrenciler için Psikolojik Analiz Sitesi           
              
-Bu proje, Mvc dünyasına kurumsal mimari ile code first yaklaşımını kullanarak oluşturulan bir projedir.Asp.Net Mvc kullanarak bir  Sözlük benzeri uygulama geliştirmeyi ele alır. Projede kullanılan teknolojiler arasında Asp.Net Mvc, SQL Server, Entity Framework, Bootstrap, Fluent Validation ve N-Tier Architecture(Katmanlı Mimarisi) bulunmaktadır.
-
-
-
-https://github.com/omerfarukkpala/MvcProjectCamp/assets/101570820/ac124791-030b-467a-bb8c-d3ca18776a41
-
-
+Bu proje, Mvc dünyasına kurumsal mimari ile code first yaklaşımını kullanarak oluşturulan bir projedir.Asp.Net Mvc kullanarak öğencilere yönelik Psikolojik analiz sağlanarak duygu analizi yapılmasına yönelik bir projedir . Projede kullanılan teknolojiler arasında Asp.Net Mvc, SQL Server, Entity Framework, Bootstrap, Fluent Validation ve N-Tier Architecture(Katmanlı Mimarisi) bulunmaktadır. Duygu analizinde ise Python eklenerek analiz sağlanacaktır.
 
 
 ## Proje Detayları : 
