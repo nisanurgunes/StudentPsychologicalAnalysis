@@ -1,11 +1,14 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "View";
-    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+    Layout = "~/Views/Shared/_TeacherLayout.cshtml";
 }
 
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Öğrenci Listesi</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 <body class="hold-transition sidebar-mini">
     <!-- /.navbar -->
     <!-- Content Header (Page header) -->
@@ -23,48 +26,44 @@
         <!-- Default box -->
         <div class="card card-solid">
             <div class="card-body pb-0">
-                <div class="row d-flex align-items-stretch">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                            <div class="card bg-light">
-                                <div class="card-header text-muted border-bottom-0">
-                                    @item.StudentClass
-                                </div>
-                                <div class="card-body pt-0">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h2 class="lead"><b>@item.StudentName @item.StudentSurname</b></h2>
-                                            
-                                            <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Mail: @item.StudentUserName</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-5 text-center">
-                                            <img src="@item.StudentImage" alt="" class="img-circle img-fluid">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="text-right">
-                                        <a href="#" class="btn btn-sm bg-teal">
-                                            <i class="fas fa-comments">Şubeler</i>
-                                        </a>
-                                        <a href="/Writer/EditWriter/@item.StudentID" ">
-                                            
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                <div class="row d-flex align-items-stretch" id="studentList">
+
                 </div>
             </div>
         </div>
-       
         <!-- /.card -->
     </section>
     <!-- /.content -->
+
+    <script>$(document).ready(function() {
+            // Login olan Teacher'ın bilgileri
+            var teachers = [
+                { teacherClass: "6-A", teacherMail: "omeralpaydin@gmail.com" },
+                { teacherClass: "7-C", teacherMail: "meryemalpayci@gmail.com" }
+            ];
+
+            // Her bir Teacher için AJAX isteği yaparak öğrenci bilgilerini al
+            teachers.forEach(function(teacher) {
+                $.ajax({
+                    url: "https://api-url/studentList",
+                    type: "GET",
+                    data: {
+                        teacherTitle: teacher.teacherClass
+                    },
+                    success: function(response) {
+                        // Öğrenci listesi döndüğünde işlemleri yap
+                        var students = response.students;
+                        students.forEach(function(student) {
+                            $("#studentList").append("<div class='col-md-3'>" +
+                                "<h5>" + student.StudentName + " " + student.StudentSurname + "</h5>" +
+                                "</div>");
+                        });
+                    },
+                    error: function() {
+                        console.error("Öğrenci listesi alınamadı.");
+                    }
+                });
+            });
+        });</script>
 </body>
 </html>
-

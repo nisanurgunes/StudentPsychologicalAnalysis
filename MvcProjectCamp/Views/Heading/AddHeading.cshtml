@@ -19,8 +19,8 @@
         @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.vlc, new { @class = "form-control" })
         <br />
         @Html.Label("Öğretmen")
-        @Html.DropDownListFor(x => x.WriterID, (List<SelectListItem>)ViewBag.vlw, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.WriterID)
+        @Html.DropDownListFor(x => x.TeacherID, (List<SelectListItem>)ViewBag.vlw, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.TeacherID)
         <br />
         <button class="btn btn-info">İşlem Oluştur</button>
     </div>

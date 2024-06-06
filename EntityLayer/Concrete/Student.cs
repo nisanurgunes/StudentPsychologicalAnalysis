@@ -22,8 +22,10 @@ namespace EntityLayer.Concrete
         public string StudentName { get; set; }
         [StringLength(50)]
         public string StudentSurname { get; set; }
-        [StringLength(10)]
+        [StringLength(500)]
         public string StudentImage { get; set; }
-
+        public virtual ICollection<StudentText> StudentTexts { get; set; }
+        public int? TeacherID { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

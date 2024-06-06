@@ -16,7 +16,7 @@ namespace MvcProjectCamp.Controllers
         // GET: Message
         MessageManagerBL mm = new MessageManagerBL(new EfMessageDAL());
         MessageValidator messagevalidator = new MessageValidator();
-        WriterManagerBL wm = new WriterManagerBL(new EfTeacherDAL());
+        TeacherManagerBL wm = new TeacherManagerBL(new EfTeacherDAL());
        
         [Authorize]
         public ActionResult Inbox(string p)

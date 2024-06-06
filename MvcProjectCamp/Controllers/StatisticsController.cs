@@ -25,7 +25,7 @@ namespace MvcProjectCamp.Controllers
             stats.TotalSoftwareCategoryCount = db.Headings.Count(x => x.Category.CategoryName == "Yazılım");
 
             //3. Soru: Yazar adında 'a' harfi geçen yazar sayısı
-            stats.TotalWriterLetterACount = db.Writers.Count(x => x.WriterName.ToLower().Contains("a"));
+            stats.TotalTeacherLetterACount = db.Teachers.Count(x => x.TeacherName.ToLower().Contains("a"));
 
             //4. Soru: En fazla başlığa sahip kategori adı
             stats.MaxHeadingCategoryName = cm.GetList().Where(x => x.CategoryID == db.Headings.ToList()

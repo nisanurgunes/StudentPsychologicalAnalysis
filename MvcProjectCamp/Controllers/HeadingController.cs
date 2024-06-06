@@ -14,7 +14,7 @@ namespace MvcProjectCamp.Controllers
         // GET: Heading
         HeadingManagerBL hm = new HeadingManagerBL(new EfHeadingDAL());
         CategoryManagerBL cm = new CategoryManagerBL(new EfCategoryDAL());
-        WriterManagerBL wm = new WriterManagerBL(new EfTeacherDAL());
+        TeacherManagerBL wm = new TeacherManagerBL(new EfTeacherDAL());
         public ActionResult Index()
         {
             var headingvalues = hm.GetList();
@@ -36,14 +36,14 @@ namespace MvcProjectCamp.Controllers
                                                       Value = x.CategoryID.ToString()
                                                   }).ToList();
 
-            List<SelectListItem> valuewriter = (from x in wm.GetList()
+            List<SelectListItem> valueteacher = (from x in wm.GetList()
                                                 select new SelectListItem
                                                 {
-                                                    Text = x.WriterName + " " + x.WriterSurname,
-                                                    Value = x.WriterID.ToString()
+                                                    Text = x.TeacherName + " " + x.TeacherSurname,
+                                                    Value = x.TeacherID.ToString()
                                                 }).ToList();
             ViewBag.vlc = valuecategory;
-            ViewBag.vlw = valuewriter;
+            ViewBag.vlw = valueteacher;
             return View();
         }
         [HttpPost]

@@ -47,16 +47,22 @@ namespace MvcProjectCamp.Controllers
         public ActionResult HomePage()
         {
             var studentCount = _context.Students.Count();
-            var writerCount = _context.Writers.Count();
+            var teacherCount = _context.Teachers.Count();
+            
 
-            var writerTitleCount = _context.Writers
-               .Count(w => !string.IsNullOrEmpty(w.WriterTitle));
+            var teacherClassCount = _context.Teachers
+               .Count(t => !string.IsNullOrEmpty(t.TeacherClass));
 
 
             ViewBag.StudentCount = studentCount;
-            ViewBag.WriterCount = writerCount;
-            ViewBag.WriterTitleCount = writerTitleCount;
+            ViewBag.TeacherCount = teacherCount;
+            ViewBag.TeacherClassCount = teacherClassCount;
 
+            return View();
+        }
+        public ActionResult Error()
+        {
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
             return View();
         }
     }

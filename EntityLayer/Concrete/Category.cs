@@ -22,5 +22,6 @@ namespace EntityLayer.Concrete
         // sonsuz(cok)---virtual veya property ismi de olabilir (heading)
 
         public ICollection<Heading> Headings { get; set; }
+        public ICollection<StudentText> StudentTexts { get; set; }
     }
 }

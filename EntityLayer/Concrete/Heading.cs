@@ -23,8 +23,8 @@ namespace EntityLayer.Concrete
 
         public ICollection<Content> Contents { get; set; } //1--
 
-        // ilişki writer için
-        public int WriterID { get; set; }
-        public virtual Writer Writer { get; set; }
+        // ilişki teacher için
+        public int TeacherID { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

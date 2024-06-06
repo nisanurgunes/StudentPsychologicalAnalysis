@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -9,6 +10,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+
 namespace MvcProjectCamp.Controllers
 {
     public class StudentController : Controller
@@ -17,6 +20,8 @@ namespace MvcProjectCamp.Controllers
         StudentValidator studentValidator = new StudentValidator();
 
         // GET: Student
+
+
         public ActionResult IndexS()
         {
             var StudentValues = sm.GetList();

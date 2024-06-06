@@ -25,10 +25,10 @@ namespace EntityLayer.Concrete
         public int HeadingID { get; set; }
         public virtual Heading Heading { get; set; } // sonsuz
 
-        // ilişki writer
+        // ilişki teacher
         // ? boş geçilebilir
 
-        public int? WriterID { get; set; }
-        public virtual Writer Writer { get; set; } // sonsuz
+        public int? TeacherID { get; set; }
+        public virtual Teacher Teacher { get; set; } // sonsuz
     }
 }

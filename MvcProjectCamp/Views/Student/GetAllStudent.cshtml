@@ -1,0 +1,20 @@
+﻿﻿@using EntityLayer.Concrete
+@model List<Student>
+@{
+    ViewBag.Title = "GetAllStudent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("GetAllStudent", "Student", FormMethod.Post))
+{
+    <p>
+        Aranacak Öğrenci İsim ve Soy isim Girin: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+
+@foreach (var item in Model)
+{
+    <p>@item.</p>
+}
+

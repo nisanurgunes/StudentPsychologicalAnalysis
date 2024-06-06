@@ -10,7 +10,7 @@ namespace EntityLayer.Concrete
     {
         public int TotalCategoryCount { get; set; }
         public int TotalSoftwareCategoryCount { get; set; }
-        public int TotalWriterLetterACount { get; set; }
+        public int TotalTeacherLetterACount { get; set; }
         public string MaxHeadingCategoryName { get; set; }
         public int DifferenceCategoryStatus { get; set; }
     }

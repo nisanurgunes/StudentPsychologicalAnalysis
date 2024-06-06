@@ -1,7 +1,27 @@
-﻿
+﻿@using System.Data.Entity
+@using DataAccessLayer.Concrete
 @{
     Layout = null;
 }
+@{ string studentName = ""; // öğreci adı
+    string studentSurname = ""; // öğreci soyadı
+    string studentImage = ""; // öğreci görsel
+
+    // Veritabanından yazar adı ve soyadını çekme
+    using (var context = new Context())
+    {
+        var student = context.Students
+                            .Where(s => s.StudentUserName == User.Identity.Name) // Varsayılan olarak login olan kullanıcının mail adresini kullanalıldı.
+                            .FirstOrDefault();
+
+        if (student != null)
+        {
+            studentName = student.StudentName;
+            studentSurname = student.StudentSurname;
+            studentImage = student.StudentImage;
+        }
+    } }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,10 +69,10 @@ to get the desired effect
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="~/AdminLTE-3.0.4/dist/img/2.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="@studentImage" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="/StudentPanel/StudentScreen/" class="d-block">Öğrenci Kullanıcı</a>
+                        <a href="/StudentPanel/NewStudentText/" class="d-block">@studentName @studentSurname</a>
                     </div>
                 </div>
 
@@ -60,7 +80,7 @@ to get the desired effect
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item has-treeview">
-                            <a href="/StudentPanel/StudentScreen" class="nav-link">
+                            <a href="/StudentPanel/NewStudentText" class="nav-link">
                                 <i class="nav-icon fas fa-envelope-open-text"></i>
                                 <p>
                                     Haftalık Analiz
@@ -110,7 +130,7 @@ to get the desired effect
     <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- Page Script -->
     <script>
-    $(function () {
+        $(function () {
             //Add text editor
             $('#compose-textarea').summernote().noConflict;
         })</script>

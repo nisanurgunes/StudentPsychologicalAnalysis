@@ -20,14 +20,16 @@ namespace MvcProjectCamp.Controllers
     {
         // GET: Login
         AdminManagerBL adminManager = new AdminManagerBL(new EfAdminDAL());
-        WriterLoginManagerBL wm = new WriterLoginManagerBL(new EfTeacherDAL());
+        TeacherLoginManagerBL wm = new TeacherLoginManagerBL(new EfTeacherDAL());
         StudentManagerBL sm = new StudentManagerBL(new EfStudentDAL());
         // GET: Login
+        
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Index(Admin p)
         {
@@ -43,33 +45,29 @@ namespace MvcProjectCamp.Controllers
             {
                 return RedirectToAction("Index");
             }
-
-
         }
 
         [HttpGet]
-        public ActionResult WriterLogin()
+        public ActionResult TeacherLogin()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult WriterLogin(Writer p)
+        public ActionResult TeacherLogin(Teacher p)
         {
             Context c = new Context();
-            var writeruserinfo = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
-            //var writeruserinfo = wm.GetWriter(p.WriterMail, p.WriterPassword);
-            if (writeruserinfo != null)
+            var teacheruserinfo = c.Teachers.FirstOrDefault(x => x.TeacherMail == p.TeacherMail && x.TeacherPassword == p.TeacherPassword);
+            if (teacheruserinfo != null)
             {
-                FormsAuthentication.SetAuthCookie(writeruserinfo.WriterMail, false);
-                Session["WriterMail"] = writeruserinfo.WriterMail;
-                return RedirectToAction("MyContent", "WriterPanelContent");
+                FormsAuthentication.SetAuthCookie(teacheruserinfo.TeacherMail, false);
+                Session["TeacherMail"] = teacheruserinfo.TeacherMail;
+                return RedirectToAction("MyContent", "TeacherPanelContent");
             }
             else
             {
-                return RedirectToAction("WriterLogin");
+                return RedirectToAction("TeacherLogin");
             }
-
         }
 
         [HttpGet]
@@ -87,14 +85,14 @@ namespace MvcProjectCamp.Controllers
             {
                 FormsAuthentication.SetAuthCookie(studentUserInfo.StudentUserName, false);
                 Session["StudentUserName"] = studentUserInfo.StudentUserName;
-                return RedirectToAction("StudentScreen", "StudentPanel");
+                Session["StudentID"] = studentUserInfo.StudentID; // Store the StudentID in the session
+                return RedirectToAction("NewStudentText", "StudentPanel");
             }
             else
             {
                 return RedirectToAction("StudentLogin");
             }
         }
-
 
         public ActionResult LogOut()
         {
