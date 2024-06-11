@@ -62,19 +62,19 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            if (item.Category.CategoryName == "7-A")
+                            if (item.SchoolClass.ClassList == "7-A")
                             {
                                 color = "badge badge-warning";
                             }
-                            if (item.Category.CategoryName == "7-B")
+                            if (item.SchoolClass.ClassList == "7-B")
                             {
                                 color = "badge badge-success";
                             }
-                            if (item.Category.CategoryName == "7-C")
+                            if (item.SchoolClass.ClassList == "7-C")
                             {
                                 color = "badge badge-success";
                             }
-                            if (item.Category.CategoryName == "7-D")
+                            if (item.SchoolClass.ClassList == "7-D")
                             {
                                 color = "badge badge-success";
                             }
@@ -104,7 +104,7 @@
                                    
                                 </td>
                                 <td class="project-state">
-                                    <span class="@color">@item.Category.CategoryName</span>
+                                    <span class="@color">@item.SchoolClass.ClassList</span>
                                 </td>
                                 <td class="project-actions text-right">
                                     

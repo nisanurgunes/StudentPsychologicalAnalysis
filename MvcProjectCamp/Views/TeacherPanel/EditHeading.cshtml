@@ -17,7 +17,7 @@
         @Html.TextAreaFor(x => x.HeadingName, new { @class = "form-control" })
         <br />
         @Html.Label("Kategori")
-        @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.vlc, new { @class = "form-control" })
+        @Html.DropDownListFor(x => x.ClassID, (List<SelectListItem>)ViewBag.vlc, new { @class = "form-control" })
         <br />
         <button class="btn btn-success">Güncelle</button>
     </div>

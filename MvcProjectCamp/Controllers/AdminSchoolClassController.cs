@@ -11,30 +11,30 @@ using System.Web.Mvc;
 
 namespace MvcProjectCamp.Controllers
 {
-    public class AdminCategoryController : Controller
+    public class AdminSchoolClassController : Controller
     {
-        CategoryManagerBL cm = new CategoryManagerBL(new EfCategoryDAL());
+        SchoolClassManagerBL scm = new SchoolClassManagerBL(new EfSchoolClassDAL());
         [Authorize]
 
         public ActionResult Index()
         {
-            var categoryvalues = cm.GetList();
-            return View(categoryvalues);
+            var schoolClassvalues = scm.GetList();
+            return View(schoolClassvalues);
         }
         [HttpGet]
-        public ActionResult AddCategory()
+        public ActionResult AddSchoolClass()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddCategory(Category p)
+        public ActionResult AddSchoolClass(SchoolClass p)
         {
-            CategoryValidator categoryValidator = new CategoryValidator();
-            ValidationResult results = categoryValidator.Validate(p);
+            SchoolClassValidator schoolClassValidator = new SchoolClassValidator();
+            ValidationResult results = schoolClassValidator.Validate(p);
             if (results.IsValid)
             {
-                cm.CategoryAdd(p);
+                scm.SchoolClassAdd(p);
                 return RedirectToAction("Index");
             }
             else
@@ -47,26 +47,26 @@ namespace MvcProjectCamp.Controllers
             return View();
         }
 
-        public ActionResult DeleteCategory(int id)
+        public ActionResult DeleteSchoolClass(int id)
         {
-            var categoryvalue = cm.GetByID(id);
+            var schoolClassvalue = scm.GetByID(id);
 
-            cm.CategoryDelete(categoryvalue);
+            scm.SchoolClassDelete(schoolClassvalue);
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult EditCategory(int id)
+        public ActionResult EditSchoolClass(int id)
         {
-            var categoryvalue = cm.GetByID(id);
-            return View(categoryvalue);
+            var schoolClassvalue = scm.GetByID(id);
+            return View(schoolClassvalue);
         }
 
         [HttpPost]
-        public ActionResult EditCategory(Category p)
+        public ActionResult EditSchoolClass(SchoolClass p)
         {
-            cm.CategoryUpdate(p);
+            scm.SchoolClassUpdate(p);
             return RedirectToAction("Index");
         }
     }

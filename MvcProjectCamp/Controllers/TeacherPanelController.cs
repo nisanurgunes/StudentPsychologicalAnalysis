@@ -20,7 +20,7 @@ namespace MvcProjectCamp.Controllers
     {
         // GET: TeacherPanel
         HeadingManagerBL hm = new HeadingManagerBL(new EfHeadingDAL());
-        CategoryManagerBL cm = new CategoryManagerBL(new EfCategoryDAL());
+        SchoolClassManagerBL scm = new SchoolClassManagerBL(new EfSchoolClassDAL());
         TeacherManagerBL tm = new TeacherManagerBL(new EfTeacherDAL());
         TeacherValidator teacherValidator = new TeacherValidator();
         Context c = new Context();
@@ -61,13 +61,13 @@ namespace MvcProjectCamp.Controllers
         [HttpGet]
         public ActionResult NewHeading()
         {
-            List<SelectListItem> valuecategory = (from x in cm.GetList()
+            List<SelectListItem> valueschoolClass = (from x in scm.GetList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = x.CategoryName,
-                                                      Value = x.CategoryID.ToString()
+                                                      Text = x.ClassList,
+                                                      Value = x.ClassID.ToString()
                                                   }).ToList();
-            ViewBag.vlc = valuecategory;
+            ViewBag.vlc = valueschoolClass;
             return View();
         }
 
@@ -86,13 +86,13 @@ namespace MvcProjectCamp.Controllers
         [HttpGet]
         public ActionResult EditHeading(int id)
         {
-            List<SelectListItem> valuecategory = (from x in cm.GetList()
+            List<SelectListItem> valueschoolClass = (from x in scm.GetList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = x.CategoryName,
-                                                      Value = x.CategoryID.ToString()
+                                                      Text = x.ClassList,
+                                                      Value = x.ClassID.ToString()
                                                   }).ToList();
-            ViewBag.vlc = valuecategory;
+            ViewBag.vlc = valueschoolClass;
             var HeadingValue = hm.GetByID(id);
             return View(HeadingValue);
         }

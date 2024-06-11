@@ -6,6 +6,7 @@ using EntityLayer.Concrete;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,11 +23,33 @@ namespace MvcProjectCamp.Controllers
         // GET: Student
 
 
+        public Context db = new Context(); // Update with your actual DbContext name
+
+        // GET: Student
         public ActionResult IndexS()
         {
-            var StudentValues = sm.GetList();
-            return View(StudentValues);
+            var model = new List<Student>();
+            return View(model);
         }
+
+        [HttpGet]
+        public JsonResult GetStudentsByClass(string studentClass)
+        {
+            var students = db.Students
+                             .Where(s => s.StudentClass == studentClass)
+                             .Select(s => new {
+                                 s.StudentName,
+                                 s.StudentSurname,
+                                 s.StudentClass,
+                                 s.StudentUserName,
+                                 s.StudentImage,
+                                 s.StudentID
+                             })
+                             .ToList();
+
+            return Json(students, JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpGet]
         public ActionResult AddStudent()

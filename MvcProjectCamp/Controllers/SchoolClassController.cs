@@ -13,38 +13,37 @@ using System.Web.Mvc;
 
 namespace MvcProjectCamp.Controllers
 {
-    public class CategoryController : Controller
+    public class SchoolClassController : Controller
     {
-        // GET: Category
-        CategoryManagerBL cm = new CategoryManagerBL(new EfCategoryDAL());
+        // GET: SchoolClass
+        SchoolClassManagerBL scm = new SchoolClassManagerBL(new EfSchoolClassDAL());
 
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult GetCategoryList()
+        public ActionResult GetSchoolClassList()
         {
-            var categoryvalues = cm.GetList();
-            return View(categoryvalues);
+            var schoolClassvalues = scm.GetList();
+            return View(schoolClassvalues);
         }
         [HttpGet]
-        public ActionResult AddCategory()
+        public ActionResult AddSchoolClass()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddCategory(Category p)
+        public ActionResult AddSchoolClass(SchoolClass p)
         {
-            //cm.CategoryAddBL(p);
+           
+            SchoolClassValidator schoolClassValidator = new SchoolClassValidator();
 
-            CategoryValidator categoryValidator = new CategoryValidator();
-
-            ValidationResult results = categoryValidator.Validate(p);
+            ValidationResult results = schoolClassValidator.Validate(p);
             if (results.IsValid)
             {
-                cm.CategoryAdd(p);
-                return RedirectToAction("GetCategoryList");
+                scm.SchoolClassAdd(p);
+                return RedirectToAction("GetSchoolClassList");
             }
             else
             {

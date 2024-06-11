@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Category
+    public class SchoolClass
     {
         [Key]
-        public int CategoryID { get; set; }
+        public int ClassID { get; set; }
         [StringLength(50)]
-        public string CategoryName { get; set; }
+        public string ClassList { get; set; }
         [StringLength(200)]
-        public string CategoryDescription { get; set; }
-        public bool CategoryStatus { get; set; }
+        public string ClassesTeacher { get; set; }
+        public bool ClassStatus { get; set; }
 
         //ilişkiler
-        // 1--ICollection (category)
+        // 1--ICollection (class)
         // sonsuz(cok)---virtual veya property ismi de olabilir (heading)
 
         public ICollection<Heading> Headings { get; set; }

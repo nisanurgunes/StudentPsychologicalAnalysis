@@ -12,12 +12,12 @@ namespace MvcProjectCamp.Controllers
     public class StudentPanelController : Controller
     {
         private readonly StudentTextManagerBL _studentTextManager;
-        private readonly CategoryManagerBL _categoryManager;
+        private readonly SchoolClassManagerBL _schoolClassManager;
 
         public StudentPanelController()
         {
             _studentTextManager = new StudentTextManagerBL(new EfStudentTextDAL());
-            _categoryManager = new CategoryManagerBL(new EfCategoryDAL());
+            _schoolClassManager = new SchoolClassManagerBL(new EfSchoolClassDAL());
         }
 
         [HttpGet]
@@ -32,8 +32,8 @@ namespace MvcProjectCamp.Controllers
             }
 
             // Gerekirse kategori bilgilerini al ve ViewBag içine koy
-            var categories = _categoryManager.GetList();
-            ViewBag.Categories = new SelectList(categories, "CategoryID", "CategoryName");
+            var schoolClasses = _schoolClassManager.GetList();
+            ViewBag.Categories = new SelectList(schoolClasses, "ClassID", "ClassList");
 
             // StudentID değerini view'a gönder
             ViewBag.StudentID = studentId;
@@ -53,23 +53,23 @@ namespace MvcProjectCamp.Controllers
             }
 
             // Session'dan CategoryID değerini al veya belirle
-            int categoryId = Convert.ToInt32(Session["CategoryID"]);
-            if (categoryId == 0)
+            int schoolClassId = Convert.ToInt32(Session["ClassID"]);
+            if (schoolClassId == 0)
             {
                 // Eğer Session'da CategoryID bulunmuyorsa, default bir değer veya mantıksal bir seçim yapılabilir
                 // Burada, ilk kategoriyi alabilirsiniz:
-                categoryId = _categoryManager.GetList().FirstOrDefault()?.CategoryID ?? 0;
+                schoolClassId = _schoolClassManager.GetList().FirstOrDefault()?.ClassID ?? 0;
             }
 
-            if (categoryId == 0)
+            if (schoolClassId == 0)
             {
-                // Eğer geçerli bir CategoryID bulunamazsa, bir hata sayfasına yönlendir veya bir mesaj göster
+                // Eğer geçerli bir SchoolClassID bulunamazsa, bir hata sayfasına yönlendir veya bir mesaj göster
                 return RedirectToAction("NewStudentText");
             }
 
-            // Alınan StudentID ve CategoryID değerlerini studentText nesnesine ekle
+            // Alınan StudentID ve SchoolClassID değerlerini studentText nesnesine ekle
             studentText.StudentID = studentId;
-            studentText.CategoryID = categoryId;
+            studentText.ClassID = schoolClassId;
             studentText.StudentTextDate = DateTime.Now;
 
             // StudentText tablosuna ekle

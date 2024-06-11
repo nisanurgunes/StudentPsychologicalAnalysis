@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IAboutServiceBL.cs" />
     <Compile Include="Abstract\IAdminServiceBL.cs" />
-    <Compile Include="Abstract\ICategoryServiceBL.cs" />
+    <Compile Include="Abstract\ISchoolClassServiceBL.cs" />
     <Compile Include="Abstract\IContactServiceBL.cs" />
     <Compile Include="Abstract\IContentServiceBL.cs" />
     <Compile Include="Abstract\IHeadingServiceBL.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Abstract\ITeacherServiceBL.cs" />
     <Compile Include="Concrete\AboutManagerBL.cs" />
     <Compile Include="Concrete\AdminManagerBL.cs" />
-    <Compile Include="Concrete\CategoryManagerBL.cs" />
+    <Compile Include="Concrete\SchoolClassManagerBL.cs" />
     <Compile Include="Concrete\StudentTextManagerBL.cs" />
     <Compile Include="Concrete\ContactManagerBL.cs" />
     <Compile Include="Concrete\ContentManagerBL.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Concrete\TeacherLoginManagerBL.cs" />
     <Compile Include="Concrete\TeacherManagerBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidationRules\CategoryValidator.cs" />
+    <Compile Include="ValidationRules\SchoolClassValidator.cs" />
     <Compile Include="ValidationRules\ContactValidator.cs" />
     <Compile Include="ValidationRules\MessageValidator.cs" />
     <Compile Include="ValidationRules\StudentValidator.cs" />

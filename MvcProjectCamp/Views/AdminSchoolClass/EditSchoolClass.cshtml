@@ -1,0 +1,25 @@
+﻿@model EntityLayer.Concrete.SchoolClass
+
+@{
+    ViewBag.Title = "EditSchoolClass";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<br />
+<h2>Şube Bilgisi Düzenleme Sayfası</h2>
+@using (Html.BeginForm("EditSchoolClass", "AdminSchoolClass", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Şube Kimlik")
+        @Html.TextBoxFor(x => x.ClassID, new { @class = "form-control" })
+        <br />
+        @Html.Label("Şube")
+        @Html.TextBoxFor(x => x.ClassList, new { @class = "form-control" })
+        <br />
+        @Html.Label("Sınıf Öğretmeni")
+        @Html.TextAreaFor(x => x.ClassesTeacher, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-success">Güncelle</button>
+    </div>
+}

@@ -1,0 +1,25 @@
+﻿@model EntityLayer.Concrete.SchoolClass
+
+@{
+    ViewBag.Title = "AddSchoolClass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Yeni Şube Ekleme Sayfası</h1>
+<br />
+@using (Html.BeginForm("AddSchoolClass", "AdminSchoolClass", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Şube")
+        @Html.TextBoxFor(x => x.ClassList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.ClassList)
+        <br /><br />
+        @Html.Label("Açıklamayı Yazınız")
+        @Html.TextAreaFor(x => x.ClassesTeacher, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.ClassesTeacher)
+        <br /><br />
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+}
+
+

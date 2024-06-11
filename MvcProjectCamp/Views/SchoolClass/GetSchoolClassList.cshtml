@@ -1,5 +1,5 @@
 ﻿@using EntityLayer.Concrete
-@model List<Category>
+@model List<SchoolClass>
 
 @{
     Layout = null;
@@ -17,12 +17,12 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.CategoryID</td>
-            <td>@item.CategoryName</td>
-            <td>@item.CategoryDescription</td>
-            <td>@item.CategoryStatus</td>
+            <td>@item.ClassID</td>
+            <td>@item.ClassList</td>
+            <td>@item.ClassesTeacher</td>
+            <td>@item.ClassStatus</td>
         </tr>
     }
 </table>
 <br />
-<a href="/Category/AddCategory" class="btn btn-info">Yeni Kategori</a>
+<a href="/SchoolClass/AddSchoolClass" class="btn btn-info">Yeni Kategori</a>

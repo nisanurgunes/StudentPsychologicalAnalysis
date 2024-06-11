@@ -14,14 +14,15 @@ namespace EntityLayer.Concrete
         [StringLength(5000)]
 
         public string StudentTextContent { get; set; }
-
+          
         public DateTime StudentTextDate { get; set; }
-        public int CategoryID { get; set; }
-        public virtual Category Category { get; set; } // sonsuz
+        public int ClassID { get; set; }
+        public virtual SchoolClass SchoolClass{ get; set; } // sonsuz
 
         public int StudentID { get; set; }
         public virtual Student Student { get; set; }
 
+       
 
     }
 }

@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IAboutDAL.cs" />
     <Compile Include="Abstract\IAdminDAL.cs" />
-    <Compile Include="Abstract\ICategoryDAL.cs" />
+    <Compile Include="Abstract\ISchoolClassDAL.cs" />
     <Compile Include="Abstract\IContactDAL.cs" />
     <Compile Include="Abstract\IContentDAL.cs" />
     <Compile Include="Abstract\IHeadingDAL.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Concrete\GenericRepositoryDAL.cs" />
     <Compile Include="EntityFramework\EfAboutDAL.cs" />
     <Compile Include="EntityFramework\EfAdminDAL.cs" />
-    <Compile Include="EntityFramework\EfCategoryDAL.cs" />
+    <Compile Include="EntityFramework\EfSchoolClassDAL.cs" />
     <Compile Include="EntityFramework\EfContactDAL.cs" />
     <Compile Include="EntityFramework\EfContentDAL.cs" />
     <Compile Include="EntityFramework\EfHeadingDAL.cs" />
@@ -82,9 +82,9 @@
     <Compile Include="EntityFramework\EfStudentDAL.cs" />
     <Compile Include="EntityFramework\EfStudentTextDAL.cs" />
     <Compile Include="EntityFramework\EfTeacherDAL.cs" />
-    <Compile Include="Migrations\202406061014298_UpdateDatabase.cs" />
-    <Compile Include="Migrations\202406061014298_UpdateDatabase.designer.cs">
-      <DependentUpon>202406061014298_UpdateDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202406061311453_schoolclass_mig.cs" />
+    <Compile Include="Migrations\202406061311453_schoolclass_mig.designer.cs">
+      <DependentUpon>202406061311453_schoolclass_mig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,8 +103,8 @@
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202406061014298_UpdateDatabase.resx">
-      <DependentUpon>202406061014298_UpdateDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202406061311453_schoolclass_mig.resx">
+      <DependentUpon>202406061311453_schoolclass_mig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

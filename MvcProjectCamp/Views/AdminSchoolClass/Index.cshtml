@@ -1,0 +1,31 @@
+﻿@using EntityLayer.Concrete
+@model List<SchoolClass>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Şube</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.ClassID</th>
+            <td>@item.ClassList</td>
+            <td><a href="/AdminSchoolClass/DeleteSchoolClass/@item.ClassID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/AdminSchoolClass/EditSchoolClass/@item.ClassID" class="btn btn-warning">Güncelle</a></td>
+            
+        </tr>
+    }
+</table>
+<a href="/AdminSchoolClass/AddSchoolClass" class="btn btn-info">Yeni Şube Kaydı</a>
+

@@ -8,10 +8,10 @@ namespace EntityLayer.Concrete
 {
     public class Statistics
     {
-        public int TotalCategoryCount { get; set; }
-        public int TotalSoftwareCategoryCount { get; set; }
+        public int TotalSchoolClassCount { get; set; }
+        public int TotalSoftwareSchoolClassCount { get; set; }
         public int TotalTeacherLetterACount { get; set; }
-        public string MaxHeadingCategoryName { get; set; }
-        public int DifferenceCategoryStatus { get; set; }
+        public string MaxHeadingSchoolClassList { get; set; }
+        public int DifferenceSchoolClassStatus { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace DataAccessLayer.Concrete
     {
         // SQL Tarafına Tabloları Yazdırmak İçin
         public DbSet<About> Abouts { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Content> Contents { get; set; }
         public DbSet<Heading> Headings { get; set; }

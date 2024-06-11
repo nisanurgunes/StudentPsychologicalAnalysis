@@ -13,7 +13,7 @@ namespace MvcProjectCamp.Controllers
     {
         // GET: Heading
         HeadingManagerBL hm = new HeadingManagerBL(new EfHeadingDAL());
-        CategoryManagerBL cm = new CategoryManagerBL(new EfCategoryDAL());
+        SchoolClassManagerBL scm = new SchoolClassManagerBL(new EfSchoolClassDAL());
         TeacherManagerBL wm = new TeacherManagerBL(new EfTeacherDAL());
         public ActionResult Index()
         {
@@ -29,11 +29,11 @@ namespace MvcProjectCamp.Controllers
         [HttpGet]
         public ActionResult AddHeading()
         {
-            List<SelectListItem> valuecategory = (from x in cm.GetList()
+            List<SelectListItem> valueschoolClass = (from x in scm.GetList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = x.CategoryName,
-                                                      Value = x.CategoryID.ToString()
+                                                      Text = x.ClassList,
+                                                      Value = x.ClassID.ToString()
                                                   }).ToList();
 
             List<SelectListItem> valueteacher = (from x in wm.GetList()
@@ -42,7 +42,7 @@ namespace MvcProjectCamp.Controllers
                                                     Text = x.TeacherName + " " + x.TeacherSurname,
                                                     Value = x.TeacherID.ToString()
                                                 }).ToList();
-            ViewBag.vlc = valuecategory;
+            ViewBag.vlc = valueschoolClass;
             ViewBag.vlw = valueteacher;
             return View();
         }
@@ -57,13 +57,13 @@ namespace MvcProjectCamp.Controllers
         [HttpGet]
         public ActionResult EditHeading(int id)
         {
-            List<SelectListItem> valuecategory = (from x in cm.GetList()
+            List<SelectListItem> valueschoolClass = (from x in scm.GetList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = x.CategoryName,
-                                                      Value = x.CategoryID.ToString()
+                                                      Text = x.ClassList,
+                                                      Value = x.ClassID.ToString()
                                                   }).ToList();
-            ViewBag.vlc = valuecategory;
+            ViewBag.vlc = valueschoolClass;
             var HeadingValue = hm.GetByID(id);
             return View(HeadingValue);
         }
