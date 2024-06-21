@@ -21,6 +21,7 @@ namespace EntityLayer.Concrete
         [StringLength(50)]
         public string StudentName { get; set; }
         [StringLength(50)]
+        
         public string StudentSurname { get; set; }
         [StringLength(500)]
         public string StudentImage { get; set; }
