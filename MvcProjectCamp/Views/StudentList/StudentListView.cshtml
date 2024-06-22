@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewBag.Title = "Öğrenci Listesi";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
 }
@@ -7,78 +7,79 @@
 <html>
 <head>
     <title>Öğrenci Listesi</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body class="hold-transition sidebar-mini">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>BANÜ Okulları Öğrenci Listesi</h1>
+    <div class="row d-flex align-items-stretch">
+        @foreach (var student in Model.Students)
+        {
+            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                <div class="card bg-light">
+                    <div class="card-header text-muted border-bottom-0">
+                        @student.StudentClass
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="lead"><b>@student.StudentName @student.StudentSurname</b></h2>
+                                <!-- Öğrenci hakkında bilgi -->
+                                <p class="text-muted text-sm"><b>Hakkında: </b> Öğrenci hakkında bilgi gelebilir </p>
+                                <!-- Öğrenci mail bilgisi -->
+                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Mail: Öğrenci maili gelebilir</li>
+                                </ul>
+                            </div>
+                            <div class="col-5 text-center">
+                                <!-- Öğrenci resmi -->
+                                <img src="@student.StudentImage" alt="" class="img-circle img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-right">
+                            <!-- Öğrenciye ait ek butonlar -->
+                            <a href="#" class="btn btn-sm bg-teal">
+                                <i class="fas fa-comments">Özel Notlar</i>
+                            </a>
+                            <a href="/Student/EditStudent/@student.StudentID" class="btn btn-sm btn-primary">
+                                <i class="fas fa-user"></i> Profili Düzenle
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        }
+    </div>
 
-    <section class="content">
-        <div class="card card-solid">
-            <div class="card-body pb-0">
-                <div class="row d-flex align-items-stretch" id="studentList">
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            // Dinamik olarak login olan öğretmenin TeacherClass bilgisi
-            var teacherClass = "6-A"; // Bu değer dinamik olarak oturumdan alınabilir
+function getMatchingStudents() {
+    $.ajax({
+        url: '@Url.Action("GetMatchingStudents", "StudentList")',
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (data) {
+            if (data) {
+                var studentListHtml = '<ul>';
+                $.each(data, function (index, student) {
+                    studentListHtml += '<li>' + student.StudentName + ' ' + student.StudentSurname + '</li>';
+                });
+                studentListHtml += '</ul>';
+                $('#studentList').html(studentListHtml);
+            } else {
+                $('#studentList').html('<p>Öğrenci bulunamadı</p>');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
 
-            // AJAX isteği yaparak öğrenci bilgilerini al
-            $.ajax({
-                url: "/StudentList/GetStudentsByTeacherClass",
-                type: "GET",
-                data: { teacherClass: teacherClass },
-                success: function (response) {
-                    console.log(response); // Dönen veriyi kontrol etmek için ekledik
-                    var students = response.students;
-                    students.forEach(function (student) {
-                        $("#studentList").append(`
-                                <div class='col-12 col-sm-6 col-md-4 d-flex align-items-stretch'>
-                                    <div class='card bg-light'>
-                                        <div class='card-header text-muted border-bottom-0'>
-                                            ${student.StudentClass}
-                                        </div>
-                                        <div class='card-body pt-0'>
-                                            <div class='row'>
-                                                <div class='col-7'>
-                                                    <h2 class='lead'><b>${student.StudentName} ${student.StudentSurname}</b></h2>
-                                                    
-                                                    <ul class='ml-4 mb-0 fa-ul text-muted'>
-                                                        <li class='small'><span class='fa-li'><i class='fas fa-lg fa-user'></i></span> Kullanıcı Adı: ${student.StudentUserName}</li>
-                                                    </ul>
-                                                </div>
-                                                <div class='col-5 text-center'>
-                                                    <img src='${student.StudentImage}' alt='' class='img-circle img-fluid'>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class='card-footer'>
-                                            <div class='text-right'>
-                                               
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `);
-                    });
-                },
-                error: function () {
-                    console.error("Öğrenci listesi alınamadı.");
-                }
-            });
-        });
+// Öğrenci listesini al
+getMatchingStudents();
+
     </script>
+
+</head>
+<body>
+    <div id="studentList"></div>
 </body>
 </html>

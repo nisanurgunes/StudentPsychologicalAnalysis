@@ -10,6 +10,6 @@ namespace DataAccessLayer.Abstract
     //IWriterDAL
     public interface ITeacherDAL : IRepositoryDAL<Teacher>
     {
-
+        List<Teacher> GetList();
     }
 }

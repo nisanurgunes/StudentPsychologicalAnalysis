@@ -11,8 +11,8 @@ namespace DataAccessLayer.Concrete
 {
     public class GenericRepositoryDAL<T> : IRepositoryDAL<T> where T : class
     {
-        Context db = new Context(); // sql bağlantı
-        DbSet<T> _object; // obje tanımladık
+          public Context db = new Context(); // sql bağlantı
+          public DbSet<T> _object; // obje tanımladık
 
         public GenericRepositoryDAL() // değer atamak için
         {

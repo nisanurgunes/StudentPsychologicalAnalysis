@@ -5,7 +5,7 @@ namespace DataAccessLayer.Concrete
 {
     public class Context : DbContext
     {
-        // SQL Tarafına Tabloları Yazdırmak İçin
+     
         public DbSet<About> Abouts { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<Contact> Contacts { get; set; }

@@ -11,7 +11,7 @@ namespace BusinessLayer.Concrete
 {
     public class TeacherLoginManagerBL : ITeacherLoginServiceBL
     {
-        ITeacherDAL _teacherDal;
+        private readonly ITeacherDAL _teacherDal;
 
         public TeacherLoginManagerBL(ITeacherDAL teacherDal)
         {
@@ -22,5 +22,11 @@ namespace BusinessLayer.Concrete
         {
             return _teacherDal.Get(x => x.TeacherMail == username && x.TeacherPassword == password);
         }
+
+        public List<Teacher> GetTeachers()
+        {
+            return _teacherDal.GetList();
+        }
     }
 }
+
