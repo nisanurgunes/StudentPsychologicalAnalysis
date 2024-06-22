@@ -1,4 +1,4 @@
-﻿﻿@{
+﻿@{
     ViewBag.Title = "Öğrenci Listesi";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
 }
@@ -7,40 +7,62 @@
 <html>
 <head>
     <title>Öğrenci Listesi</title>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-    function getMatchingStudents() {
-        $.ajax({
-            url: '@Url.Action("GetMatchingStudents", "StudentList")',
-            type: 'POST',
-            contentType: 'application/json',
-            success: function (data) {
-                if (data) {
-                    var studentListHtml = '<ul>';
-                    $.each(data, function (index, student) {
-                        studentListHtml += '<li>' + student.StudentName + ' ' + student.StudentSurname + '</li>';
-                    });
-                    studentListHtml += '</ul>';
-                    $('#studentList').html(studentListHtml);
-                } else {
-                    $('#studentList').html('<p>Öğrenci bulunamadı</p>');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            }
-        });
-    }
-
-    // Öğrenci listesini al
-    getMatchingStudents();
-
-    </script>
-
-
 </head>
 <body>
-    <div id="studentList"></div>
+    <div class="container">
+        <div class="row" id="studentList"></div>
+    </div>
+
+    <script>
+        function getMatchingStudents() {
+            $.ajax({
+                url: '@Url.Action("GetMatchingStudents", "StudentList")',
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data) {
+                        var studentListHtml = '';
+                        $.each(data, function (index, student) {
+                            studentListHtml += '<div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">';
+                            studentListHtml += '<div class="card bg-light mb-3">';
+                            studentListHtml += '<div class="card-header text-muted border-bottom-0">';
+                            studentListHtml += student.StudentClass;
+                            studentListHtml += '</div>';
+                            studentListHtml += '<div class="card-body pt-0">';
+                            studentListHtml += '<div class="row">';
+                            studentListHtml += '<div class="col-7">';
+                            studentListHtml += '<h2 class="lead"><b>' + student.StudentName + ' ' + student.StudentSurname + '</b></h2>';
+                            studentListHtml += '<ul class="ml-4 mb-0 fa-ul text-muted">';
+                            studentListHtml += '<li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Kullanıcı Adı: ' + student.StudentUserName + '</li>';                            
+                            studentListHtml += '</ul>';
+                            studentListHtml += '</div>';
+                            studentListHtml += '<div class="col-5 text-center">';
+                            studentListHtml += '<img src="' + student.StudentImage + '" alt="" class="img-circle img-fluid">';
+                            studentListHtml += '</div>';
+                            studentListHtml += '</div>';
+                            studentListHtml += '</div>';
+                            studentListHtml += '<div class="card-footer">';
+                            studentListHtml += '<div class="text-right">';
+                            studentListHtml += '</div>';
+                            studentListHtml += '</div>';
+                            studentListHtml += '</div>';
+                            studentListHtml += '</div>';
+                        });
+                        $('#studentList').html(studentListHtml);
+                    } else {
+                        $('#studentList').html('<p>Öğrenci bulunamadı</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        // Öğrenci listesini al
+        getMatchingStudents();
+
+    </script>
 </body>
 </html>

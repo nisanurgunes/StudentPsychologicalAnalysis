@@ -33,7 +33,7 @@ namespace MvcProjectCamp.Controllers
             if (teacherClass != null)
             {
                 var matchingStudents = sm.GetList().Where(s => s.StudentClass == teacherClass)
-                                                   .Select(s => new { s.StudentName, s.StudentSurname })
+                                                   .Select(s => new { s.StudentName, s.StudentSurname, s.StudentUserName, s.StudentImage })
                                                    .ToList();
 
                 return Json(matchingStudents);
