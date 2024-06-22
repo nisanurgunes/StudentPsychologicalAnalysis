@@ -7,13 +7,13 @@ namespace DataAccessLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class schoolclass_mig : IMigrationMetadata
+    public sealed partial class AddClassificationResultToStudentText : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(schoolclass_mig));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddClassificationResultToStudentText));
         
         string IMigrationMetadata.Id
         {
-            get { return "202406061311453_schoolclass_mig"; }
+            get { return "202406212155192_AddClassificationResultToStudentText"; }
         }
         
         string IMigrationMetadata.Source

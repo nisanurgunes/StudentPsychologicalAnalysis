@@ -1,34 +1,29 @@
-﻿@using EntityLayer.Concrete
-@using PagedList
-@using PagedList.Mvc
-@model PagedList.IPagedList<Heading>
+﻿@model IEnumerable<EntityLayer.Concrete.StudentText>
+@using EntityLayer.Concrete
 @{
-    ViewBag.Title = "AllHeading";
+    ViewBag.Title = "TextResults";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
 }
-
-<h2>Bütün Kayıtlar</h2>
-
-
-@{ string color = "";}
-
 <!DOCTYPE html>
 <html>
-
 <head>
     <style>
         .fixed-height-row {
             height: 70px; /* İstediğiniz sabit yüksekliği buraya yazın */
         }
+
+        .text-right {
+            text-align: right;
+        }
     </style>
 </head>
-
 <body class="hold-transition sidebar-mini">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
+                    <h1>Text Results</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -39,6 +34,8 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Başlık İşlemleri</h3>
+                </br>
+
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -46,67 +43,58 @@
                     <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
                         <i class="fas fa-times"></i>
                     </button>
-
                 </div>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
                     <thead>
-                        <thead>
                         <tr>
                             <th style="width: 1%">#</th>
-                            <th style="width: 20%">Başlık Adı</th>
-                            <th style="width: 15%">Oluşturan Kişi</th>
-                            <th style="width: 8%" class="text-center">Şubeler</th>
-                            <th style="width: 20%"></th>
+                            <th style="width: 18%">Metinler</th>
+                            <th style="width: 8%">Analiz Sonuçları</th>
+                            <th style="width: 5%">Oluşturan Öğrenci</th>
+                            <th style="width: 5%" class="text-right">Şubeler</th>
+                            <th style="width: 10%"></th>
                         </tr>
-                    </thead>
-
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            if (item.SchoolClass.ClassList == "Orta Öğretim")
-                            {
-                                color = "badge badge-warning";
-                            }
-                            if (item.SchoolClass.ClassList == "İlkokul")
-                            {
-                                color = "badge badge-success";
-                            }
-                           
-
                             <tr>
                                 <td>
-                                    @item.HeadingID
+                                    @item.StudentTextID
                                 </td>
                                 <td>
                                     <a>
-                                        @item.HeadingName
+                                        @item.StudentTextContent
                                     </a>
                                     <br />
                                     <small>
-                                        @(((DateTime)item.HeadingDate).ToString("dd-MMM-yyyy"))
+                                        @(((DateTime)item.StudentTextDate).ToString("dd-MMM-yyyy"))
                                     </small>
                                 </td>
                                 <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="@item.Teacher.TeacherImage">
-                                        </li>
-                                    </ul>
+                                    @item.ClassificationResult
                                 </td>
-                                <td class="project-state">
-                                    <span class="@color">@item.SchoolClass.ClassList</span>
+                                <td>
+                                    <div>
+                                        <img alt="Avatar" class="table-avatar" src="@item.Student.StudentImage">
+                                    </div>
+                                    <div>
+                                        <small>@item.Student.StudentName @item.Student.StudentSurname</small>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    @item.Student.StudentClass
                                 </td>
                                 <td class="project-actions text-right">
-                                    
-                                    
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+
+
             </div>
             <!-- /.card-body -->
         </div>
@@ -114,8 +102,4 @@
     </section>
 </body>
 </html>
-@Html.PagedListPager((IPagedList)Model, p => Url.Action("AllHeading", new { p }), new PagedListRenderOptions
-{
-    LiElementClasses = new List<string>
-{ "page-link"}
-})
+

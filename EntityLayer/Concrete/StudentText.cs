@@ -20,7 +20,7 @@ namespace EntityLayer.Concrete
         public int ClassID { get; set; }
         [StringLength(50)]
         public virtual SchoolClass SchoolClass{ get; set; } // sonsuz
-
+        public string ClassificationResult { get; set; }
         public int StudentID { get; set; }
         public virtual Student Student { get; set; }
 

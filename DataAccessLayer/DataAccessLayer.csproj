@@ -82,9 +82,9 @@
     <Compile Include="EntityFramework\EfStudentDAL.cs" />
     <Compile Include="EntityFramework\EfStudentTextDAL.cs" />
     <Compile Include="EntityFramework\EfTeacherDAL.cs" />
-    <Compile Include="Migrations\202406061311453_schoolclass_mig.cs" />
-    <Compile Include="Migrations\202406061311453_schoolclass_mig.designer.cs">
-      <DependentUpon>202406061311453_schoolclass_mig.cs</DependentUpon>
+    <Compile Include="Migrations\202406212155192_AddClassificationResultToStudentText.cs" />
+    <Compile Include="Migrations\202406212155192_AddClassificationResultToStudentText.designer.cs">
+      <DependentUpon>202406212155192_AddClassificationResultToStudentText.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,8 +103,8 @@
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202406061311453_schoolclass_mig.resx">
-      <DependentUpon>202406061311453_schoolclass_mig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202406212155192_AddClassificationResultToStudentText.resx">
+      <DependentUpon>202406212155192_AddClassificationResultToStudentText.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
