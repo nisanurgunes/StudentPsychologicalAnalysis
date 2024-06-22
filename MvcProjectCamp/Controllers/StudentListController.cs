@@ -27,38 +27,21 @@ namespace MvcProjectCamp.Controllers
         [HttpPost]
         public ActionResult GetMatchingStudents()
         {
-            var teachers = new Dictionary<string, string>
-    {
-        { "meryemalpayci@gmail.com", "7-A" },
-        { "fadimesarigül@gmail.com", "7-B" },
-        { "omerapaydin@gmail.com", "7-C" },
-        { "osmankumbul@gmail.com", "7-D" },
-        { "burakpeker@gmail.com", "6-A" },
-        { "mervekalan@gmail.com", "6-B" },
-        { "elagulsen@gmail.com", "6-C" },
-        { "umutguney@gmail.com", "6-D" },
-        { "beratozcan@gmail.com", "8-A" },
-        { "ozlemkahraman@gmail.com", "8-B" },
-        { "pinarorak@gmail.com", "8-C" },
-        { "orhanbayrak@gmail.com", "8-D" },
-        // Diğer öğretmenlerin sınıf bilgileri
-    };
+            var teacherMail = User.Identity.Name; // Öğretmenin e-posta adresini al
+            var teacherClass = tm.GetList().FirstOrDefault(t => t.TeacherMail == teacherMail)?.TeacherClass;
 
-            var matchingStudents = new List<Student>();
-
-            foreach (var teacher in teachers)
+            if (teacherClass != null)
             {
-                var teacherMail = teacher.Key;
-                var teacherClass = teacher.Value;
+                var matchingStudents = sm.GetList().Where(s => s.StudentClass == teacherClass)
+                                                   .Select(s => new { s.StudentName, s.StudentSurname })
+                                                   .ToList();
 
-                var students = sm.GetList().Where(s => s.StudentClass == teacherClass).ToList();
-                matchingStudents.AddRange(students);
+                return Json(matchingStudents);
             }
 
-            var studentData = matchingStudents.Select(s => new { s.StudentName, s.StudentSurname }).ToList();
-
-            return Json(studentData);
+            return Json(null);
         }
+
     }
 }
 

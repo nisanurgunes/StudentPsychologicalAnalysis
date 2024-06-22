@@ -10,33 +10,34 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-function getMatchingStudents() {
-    $.ajax({
-        url: '@Url.Action("GetMatchingStudents", "StudentList")',
-        type: 'POST',
-        contentType: 'application/json',
-        success: function (data) {
-            if (data) {
-                var studentListHtml = '<ul>';
-                $.each(data, function (index, student) {
-                    studentListHtml += '<li>' + student.StudentName + ' ' + student.StudentSurname + '</li>';
-                });
-                studentListHtml += '</ul>';
-                $('#studentList').html(studentListHtml);
-            } else {
-                $('#studentList').html('<p>Öğrenci bulunamadı</p>');
+    function getMatchingStudents() {
+        $.ajax({
+            url: '@Url.Action("GetMatchingStudents", "StudentList")',
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data) {
+                    var studentListHtml = '<ul>';
+                    $.each(data, function (index, student) {
+                        studentListHtml += '<li>' + student.StudentName + ' ' + student.StudentSurname + '</li>';
+                    });
+                    studentListHtml += '</ul>';
+                    $('#studentList').html(studentListHtml);
+                } else {
+                    $('#studentList').html('<p>Öğrenci bulunamadı</p>');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
             }
-        },
-        error: function (xhr, status, error) {
-            console.error(error);
-        }
-    });
-}
+        });
+    }
 
-// Öğrenci listesini al
-getMatchingStudents();
+    // Öğrenci listesini al
+    getMatchingStudents();
 
     </script>
+
 
 </head>
 <body>

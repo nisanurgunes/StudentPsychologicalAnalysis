@@ -2746,7 +2746,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AdminPanelMessage\" />
     <Folder Include="Views\StudentText\" />
   </ItemGroup>
   <ItemGroup>
