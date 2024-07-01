@@ -10,6 +10,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Öğrencilerim</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
     <div class="container">
         <div class="row" id="studentList"></div>
     </div>
@@ -34,7 +43,7 @@
                             studentListHtml += '<div class="col-7">';
                             studentListHtml += '<h2 class="lead"><b>' + student.StudentName + ' ' + student.StudentSurname + '</b></h2>';
                             studentListHtml += '<ul class="ml-4 mb-0 fa-ul text-muted">';
-                            studentListHtml += '<li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Kullanıcı Adı: ' + student.StudentUserName + '</li>';                            
+                            studentListHtml += '<li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Kullanıcı Adı: ' + student.StudentUserName + '</li>';
                             studentListHtml += '</ul>';
                             studentListHtml += '</div>';
                             studentListHtml += '<div class="col-5 text-center">';

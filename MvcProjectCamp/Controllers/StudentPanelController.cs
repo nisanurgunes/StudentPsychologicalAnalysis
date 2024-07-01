@@ -38,11 +38,16 @@ namespace MvcProjectCamp.Controllers
             // StudentID değerini view'a gönder
             ViewBag.StudentID = studentId;
 
+            // Model dosya yollarını view'a gönder
+            ViewBag.ModelPath = Url.Content("~/Scripts-Model/tfjs_model/model.json");
+            ViewBag.Group1Path = Url.Content("~/Scripts-Model/tfjs_model/group1-shard1of2.bin");
+            ViewBag.TokenizerPath = Url.Content("~/Scripts-Model/tfjs_model/tokenizer.pickle");
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult NewStudentText(StudentText studentText)
+        public ActionResult NewStudentText(StudentText studentText, string classificationResult)
         {
             // Session'dan StudentID değerini al
             int studentId = Convert.ToInt32(Session["StudentID"]);
@@ -71,6 +76,9 @@ namespace MvcProjectCamp.Controllers
             studentText.StudentID = studentId;
             studentText.ClassID = schoolClassId;
             studentText.StudentTextDate = DateTime.Now;
+
+            // Sınıflandırma sonucunu ekle
+            studentText.ClassificationResult = classificationResult;
 
             // StudentText tablosuna ekle
             _studentTextManager.StudentTextAdd(studentText);

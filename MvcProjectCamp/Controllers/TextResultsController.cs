@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
-using Newtonsoft.Json;
 
 namespace MvcProjectCamp.Controllers
 {
@@ -20,13 +14,38 @@ namespace MvcProjectCamp.Controllers
         public TextResultsController()
         {
             _context = new Context();
-
         }
-                public ActionResult TextResults()
+
+        public ActionResult TextResults(string studentSearch = "", string studentClass = "")
         {
-            var studentTexts = _context.StudentTexts.ToList();
+            // Sınıf seçenekleri
+            List<SelectListItem> schoolClasses = new List<SelectListItem>();
+            for (int grade = 6; grade <= 8; grade++)
+            {
+                for (char section = 'A'; section <= 'D'; section++)
+                {
+                    string className = $"{grade}-{section}";
+                    schoolClasses.Add(new SelectListItem { Text = className, Value = className });
+                }
+            }
+            ViewBag.SchoolClasses = schoolClasses;
+
+            // Öğrenci metinlerini al ve filtrele
+            var studentTexts = _context.StudentTexts.Include("Student").ToList();
+
+            if (!string.IsNullOrEmpty(studentSearch))
+            {
+                studentTexts = studentTexts.Where(st =>
+                    st.Student.StudentName.ToLower().Contains(studentSearch.ToLower()) ||
+                    st.Student.StudentSurname.ToLower().Contains(studentSearch.ToLower())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(studentClass))
+            {
+                studentTexts = studentTexts.Where(st => st.Student.StudentClass.Equals(studentClass, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
             return View(studentTexts);
         }
- 
     }
 }

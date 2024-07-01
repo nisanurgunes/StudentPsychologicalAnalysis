@@ -10,12 +10,11 @@
     <br />
     @using (Html.BeginForm("NewStudentText", "StudentPanel", FormMethod.Post))
     {
-@Html.AntiForgeryToken()
-                <div class="form-group" style="display: inline-block; width: 50%; border: 1px solid #ccc; padding: 10px;">
-                    @Html.TextBoxFor(model => model.StudentTextContent, new { @class = "form-control", placeholder = "Metni buraya girin", style = "height: 200px;" })
-                    @Html.ValidationMessageFor(model => model.StudentTextContent, "", new { @class = "text-danger" })
-                </div>
-                                <br /><br />
-                                                <input type="submit" value="Gönder" class="btn btn-primary" />}
+        @Html.AntiForgeryToken()
+        <div class="form-group" style="display: inline-block; width: 50%; border: 1px solid #ccc; padding: 10px;">
+            @Html.TextBoxFor(model => model.StudentTextContent, new { @class = "form-control", placeholder = "Metni buraya girin", style = "height: 200px;" })
+            @Html.ValidationMessageFor(model => model.StudentTextContent, "", new { @class = "text-danger" })
+        </div>
+        <br /><br />
+        <input type="submit" value="Gönder" class="btn btn-primary" />}
 </div>
-

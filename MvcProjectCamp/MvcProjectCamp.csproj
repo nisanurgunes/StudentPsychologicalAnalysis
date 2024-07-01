@@ -200,7 +200,6 @@
     <Compile Include="Controllers\AdminSchoolClassController.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\SchoolClassController.cs" />
-    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
@@ -2729,10 +2728,8 @@
     <Content Include="Views\Authorization\Index.cshtml" />
     <Content Include="Views\Authorization\AddAdmin.cshtml" />
     <Content Include="Views\Authorization\EditAdmin.cshtml" />
-    <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Shared\_StudentLayout.cshtml" />
     <Content Include="Views\Login\StudentLogin.cshtml" />
-    <Content Include="Views\Chart\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\AdminSchoolClass\Index.cshtml" />
     <Content Include="Views\Student\StudentLogin.cshtml" />
@@ -2744,10 +2741,7 @@
     <Content Include="Views\Student\GetAllStudent.cshtml" />
     <Content Include="Views\TextResults\TextResults.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\StudentText\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
