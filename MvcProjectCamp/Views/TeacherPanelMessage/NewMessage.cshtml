@@ -1,4 +1,5 @@
 ﻿@model EntityLayer.Concrete.Message
+
 @{
     ViewBag.Title = "NewMessage";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
@@ -10,21 +11,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 3 | Compose Message</title>
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
-    <!-- Theme style -->
-    <!-- summernote -->
     <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.css">
-
     <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote.min.js"></script>
-    <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
 </head>
 <body class="hold-transition sidebar-mini">
-
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -32,43 +24,29 @@
                     <h1>Yeni Mesaj Sayfası</h1>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <form action="https://formspree.io/your@email.com" method="post">
-                    <!-- your@email.com yerine kendi mail adresimizi yazıyoruz. -->
-                    <div class="input-block">
-                        <label for="contact_author">
-                            <strong>Ad Soyad</strong> (gerekli)
-                        </label>
-                        <input type="text" name="contact_author" id="contact_author" required>
-                    </div>
-                    <div class="input-block">
-                        <label for="_replyto">
-                            <strong>E-Posta Adresi</strong> (gerekli)
-                        </label>
-                        <input type="email" name="_replyto" id="_replyto" required>
-                    </div>
-                    <div class="input-block">
-                        <label for="contact_subject">
-                            <strong>İleti Konusu</strong> (gerekli)
-                        </label>
-                        <input type="text" name="contact_subject" id="contact_subject" required>
-                    </div>
-                    <div class="textarea-block">
-                        <label for="contact_content">
-                            <strong>İleti</strong> (gerekli)
-                        </label>
-                        <textarea name="contact_content" id="contact_content" required></textarea>
-                    </div>
-                    <input type="hidden" name="_next" value="https://site.io/thanks.html"> <!-- Form formspree.io adresine gönderildikten sonra tekrar sitenize dönüş yapılarak sitenizdeki thanks.html dosyasının görüntülenmesini sağlıyor. -->
-                    <input type="submit" value="GÖNDER">
-                </form>
-                                
-                    </textarea>
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Yeni Mesaj</h3>
+                        </div>
+                        <form action="@Url.Action("NewMessage", "TeacherPanelMessage")" method="post">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="ReceiverMail">Alıcı E-Posta Adresi</label>
+                                    <input type="email" class="form-control" id="ReceiverMail" name="ReceiverMail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Subject">Konu</label>
+                                    <input type="text" class="form-control" id="Subject" name="Subject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="MessageContent">Mesaj İçeriği</label>
+                                    <textarea class="form-control" id="compose-textarea" name="MessageContent" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <div class="btn btn-default btn-file">
@@ -78,44 +56,26 @@
                                     <p class="help-block">Max. 32MB</p>
                                 </div>
                             </div>
-                            <!-- /.card-body -->
                             <div class="card-footer">
                                 <div class="float-right">
-                                    <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Taslaklara Kaydet</button>
                                     <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
                                 </div>
                                 <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> İptal Et</button>
                             </div>
-                            <!-- /.card-footer -->
-                        </div>
-                    }
-                    <!-- /.card -->
+                        </form>
+                    </div>
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
-    <!-- /.content -->
-    <!-- /.content-wrapper -->
-    <!-- Control Sidebar -->
-    <!-- /.control-sidebar -->
-    <!-- ./wrapper -->
-    <!-- jQuery -->
     <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="~/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="~/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
-    <!-- Summernote -->
     <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- Page Script -->
-    <script>$(function () {
-            //Add text editor
+    <script>
+        $(function () {
             $('#compose-textarea').summernote()
-        })</script>
+        })
+    </script>
 </body>
 </html>
-

@@ -63,7 +63,6 @@
     <Compile Include="Abstract\IContactDAL.cs" />
     <Compile Include="Abstract\IContentDAL.cs" />
     <Compile Include="Abstract\IHeadingDAL.cs" />
-    <Compile Include="Abstract\IImageFileDAL.cs" />
     <Compile Include="Abstract\IMessageDAL.cs" />
     <Compile Include="Abstract\IRepositoryDAL.cs" />
     <Compile Include="Abstract\IStudentDAL.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="EntityFramework\EfContactDAL.cs" />
     <Compile Include="EntityFramework\EfContentDAL.cs" />
     <Compile Include="EntityFramework\EfHeadingDAL.cs" />
-    <Compile Include="EntityFramework\EfImageFileDAL.cs" />
     <Compile Include="EntityFramework\EfMessageDAL.cs" />
     <Compile Include="EntityFramework\EfStudentDAL.cs" />
     <Compile Include="EntityFramework\EfStudentTextDAL.cs" />

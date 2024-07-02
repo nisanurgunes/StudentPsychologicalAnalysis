@@ -1,5 +1,5 @@
-﻿@using EntityLayer.Concrete
-@model List<Message>
+﻿@model EntityLayer.Concrete.Message
+
 @{
     ViewBag.Title = "Sendbox";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
@@ -7,125 +7,92 @@
 
 <!DOCTYPE html>
 <html>
-
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Compose Message</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.css">
+    <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
 <body class="hold-transition sidebar-mini">
-
-    <!-- Content Wrapper. Contains page content -->
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Mesaj Sayfası</h1>
+                    <h1>Yeni Mesaj Sayfası</h1>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
-    <!-- Main content -->
     <section class="content">
-        <div class="row">
-            @Html.Action("MessageListMenu", "TeacherPanelMessage")
-            <!-- /.col -->
-            <div class="col-md-9">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title">Gönderilen Mesajlar</h3>
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" placeholder="Mail kutusunda ara">
-                                <div class="input-group-append">
-                                    <div class="btn btn-primary">
-                                        <i class="fas fa-search"></i>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Yeni Mesaj</h3>
+                        </div>
+                        @using (Html.BeginForm("Sendbox", "TeacherPanelMessage", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="card-body">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="alert alert-info">@TempData["Message"]</div>
+
+                                <div class="form-group">
+                                    <label for="ReceiverMail">Alıcı E-Posta Adresi</label>
+                                    <input type="email" class="form-control" id="ReceiverMail" name="ReceiverMail" required>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(message => message.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(message => message.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(message => message.Subject, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(message => message.MessageContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(message => message.MessageContent, new { rows = "10", cols = "50", @class = "form-control" })
+                                        @Html.ValidationMessageFor(message => message.MessageContent, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="btn btn-default btn-file">
+                                            <i class="fas fa-paperclip"></i> Dosya Ekle
+                                            <input type="file" name="attachment">
+                                        </div>
+                                        <p class="help-block">Max. 32MB</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.card-tools -->
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body p-0">
-                        <div class="mailbox-controls">
-                            <!-- Check all button -->
-                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                                <i class="far fa-square"></i>
-                            </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
-                            </div>
-                            <!-- /.btn-group -->
-                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
-                            <div class="float-right">
-                                1-50/200
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+
+                            <div class="card-footer">
+                                <div class="float-right">
+                                    <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
                                 </div>
-                                <!-- /.btn-group -->
+                                <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> İptal Et</button>
                             </div>
-                            <!-- /.float-right -->
-                        </div>
-                        <div class="table-responsive mailbox-messages">
-                            <table class="table table-hover table-striped">
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <div class="icheck-primary">
-                                                    <input type="checkbox" value="" id="check1">
-                                                    <label for="check1"></label>
-                                                </div>
-                                            </td>
-                                            <td class="mailbox-star"><a href="/TeacherPanelMessage/GetSendBoxMessageDetails/@item.MessageID"><i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="/TeacherPanelMessage/GetSendBoxMessageDetails/@item.MessageID">@item.ReceiverMail</a></td>
-                                            <td class="mailbox-subject">
-                                                <b>@item.Subject</b> - @item.MessageContent.Substring(0, 30)...
-                                            </td>
-                                            <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                            <!-- /.table -->
-                        </div>
-                        <!-- /.mail-box-messages -->
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer p-0">
-                        <div class="mailbox-controls">
-                            <!-- Check all button -->
-                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                                <i class="far fa-square"></i>
-                            </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
-                            </div>
-                            <!-- /.btn-group -->
-                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
-                            <div class="float-right">
-                                1-50/200
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
-                                </div>
-                                <!-- /.btn-group -->
-                            </div>
-                            <!-- /.float-right -->
-                        </div>
+                        }
                     </div>
                 </div>
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
     </section>
-
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.min.js"></script>
+    <script>
+        $(function () {
+            $('#compose-textarea').summernote()
+        })
+    </script>
 </body>
 </html>
-

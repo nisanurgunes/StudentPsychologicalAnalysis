@@ -13,7 +13,6 @@ namespace EntityLayer.Concrete
         public int StudentTextID { get; set; }
         [StringLength(5000)]
 
-
         public string StudentTextContent { get; set; }
           
         public DateTime StudentTextDate { get; set; }

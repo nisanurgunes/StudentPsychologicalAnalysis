@@ -66,7 +66,6 @@
     <Compile Include="Abstract\IContactServiceBL.cs" />
     <Compile Include="Abstract\IContentServiceBL.cs" />
     <Compile Include="Abstract\IHeadingServiceBL.cs" />
-    <Compile Include="Abstract\IImageFileServiceBL.cs" />
     <Compile Include="Abstract\IMessageServiceBL.cs" />
     <Compile Include="Abstract\IStudentServiceBL.cs" />
     <Compile Include="Abstract\IStudentLoginServiceBL.cs" />
@@ -80,7 +79,6 @@
     <Compile Include="Concrete\ContactManagerBL.cs" />
     <Compile Include="Concrete\ContentManagerBL.cs" />
     <Compile Include="Concrete\HeadingManagerBL.cs" />
-    <Compile Include="Concrete\ImageFileManagerBL.cs" />
     <Compile Include="Concrete\MessageManagerBL.cs" />
     <Compile Include="Concrete\StudentLoginManagerBL.cs" />
     <Compile Include="Concrete\StudentManagerBL.cs" />

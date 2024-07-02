@@ -62,7 +62,7 @@ namespace MvcProjectCamp.Controllers
             {
                 FormsAuthentication.SetAuthCookie(teacheruserinfo.TeacherMail, false);
                 Session["TeacherMail"] = teacheruserinfo.TeacherMail;
-                return RedirectToAction("MyContent", "TeacherPanelContent");
+                return RedirectToAction("MyHeading", "TeacherPanel");
             }
             else
             {

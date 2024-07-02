@@ -9,10 +9,7 @@ namespace DataAccessLayer.Abstract
 {
     public interface IRepositoryDAL<T>
     {
-        //CRUD
-        //List
-        //Type Name();
-        //Generic Interface işlemidir
+      
         List<T> List();
         void Insert(T t);
 

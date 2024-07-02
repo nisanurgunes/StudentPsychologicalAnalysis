@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<EntityLayer.Concrete.StudentText>
 @using EntityLayer.Concrete
 @{
-    ViewBag.Title = "Text Results";
+    ViewBag.Title = "TextResults";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
 }
+
 <!DOCTYPE html>
 <html>
 <head>
     <style>
         .fixed-height-row {
-            height: 70px; /* İstediğiniz sabit yüksekliği buraya yazın */
+            height: 70px;
         }
 
         .text-right {
@@ -18,63 +19,62 @@
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Text Results</h1>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <!-- Filter Section -->
-        <div class="row mb-2">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="studentClass">Görüntülemek İstediğiniz Sınıfı Seçiniz:</label>
-                    @Html.DropDownList("studentClass", ViewBag.SchoolClasses as IEnumerable<SelectListItem>, new { @class = "form-control mb-3", id = "studentClass" })
-                </div>
-            </div>
-            <!-- Arama Alanı -->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="studentSearch">Öğrenci Arama:</label>
-                    <input type="text" id="studentSearch" class="form-control mb-3" placeholder="İsim veya Soyisim ile Arama Yapın">
+                    <h1>Sonuç Ekranı</h1>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Student Texts List -->
+    <section class="content">
+        <!-- Filtreleme Formu -->
+        <form method="get" action="@Url.Action("TextResults", "TextResults")">
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="studentClass">Görüntülemek İstediğiniz Sınıfı Seçiniz:</label>
+                        @Html.DropDownList("studentClass", ViewBag.SchoolClasses as IEnumerable<SelectListItem>, new { @class = "form-control mb-3", id = "studentClass" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="selectedDate">Tarih Seçiniz:</label>
+                        @Html.DropDownList("selectedDate", ViewBag.Dates as SelectList, "Tüm Tarihler", new { @class = "form-control mb-3", id = "selectedDate", onchange = "this.form.submit();" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="studentSearch">Öğrenci Arama:</label>
+                        <input type="text" id="studentSearch" name="studentSearch" class="form-control mb-3" placeholder="İsim veya Soyisim ile Arama Yapın" value="@Request.QueryString["studentSearch"]">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Öğrenci Metinleri Listesi -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Öğrenci Listesi</h3>
-                <br />
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+                <h3 class="card-title">Öğrenci Metinleri</h3>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
                             <th style="width: 1%"></th>
-                            <th style="width: 5%">Şubeler</th>
-                            <th style="width: 8%">Oluşturan Öğrenci</th>
-                            <th style="width: 19%">Metinler</th>
-                            <th style="width: 9%" class="text-right"></th>
+                            <th style="width: 5%">Sınıf</th>
+                            <th style="width: 8%">Öğrenci Adı</th>
+                            <th style="width: 19%">Metin İçeriği</th>
+                            <th style="width: 9%" class="text-right">Sonuçlar</th>
                             <th style="width: 10%"></th>
                         </tr>
                     </thead>
-                    <tbody id="studentTextsTable">
+                    <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -88,9 +88,9 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <a>@item.StudentTextContent</a>
+                                        <a>@Html.Raw(item.StudentTextContent)</a>
                                         <br />
-                                        <small>@(((DateTime)item.StudentTextDate).ToString("dd-MMM-yyyy"))</small>
+                                        <small>@item.StudentTextDate.ToString("dd-MMM-yyyy")</small>
                                     </div>
                                 </td>
                                 <td class="text-right">@item.ClassificationResult</td>
@@ -100,47 +100,7 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </section>
-
-    <script>
-        // Sayfa yüklendiğinde veya filtre seçimleri değiştiğinde çalışacak JavaScript kodu
-        document.addEventListener('DOMContentLoaded', function () {
-            // Sınıf seçimi değiştiğinde filtreleme yap
-            document.getElementById('studentClass').addEventListener('change', filterStudentTexts);
-
-            // Arama kutusuna yazı yazıldığında filtreleme yap
-            document.getElementById('studentSearch').addEventListener('input', filterStudentTexts);
-
-            // İlk yüklemede filtreleme yap
-            filterStudentTexts();
-        });
-
-        // Öğrenci metinlerini filtreleme fonksiyonu
-        function filterStudentTexts() {
-            var selectedClass = document.getElementById('studentClass').value.toLowerCase();
-            var searchQuery = document.getElementById('studentSearch').value.toLowerCase();
-
-            var studentTexts = document.getElementById('studentTextsTable').getElementsByTagName('tr');
-            for (var i = 0; i < studentTexts.length; i++) {
-                var studentText = studentTexts[i];
-
-                var studentClass = studentText.cells[1].textContent.trim().toLowerCase();
-                var studentName = studentText.cells[2].textContent.trim().toLowerCase();
-
-                var classMatches = selectedClass === '' || studentClass === selectedClass;
-                var nameMatches = searchQuery === '' || studentName.includes(searchQuery);
-
-                if (classMatches && nameMatches) {
-                    studentText.style.display = '';
-                } else {
-                    studentText.style.display = 'none';
-                }
-            }
-        }
-    </script>
-
 </body>
 </html>

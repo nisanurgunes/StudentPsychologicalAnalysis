@@ -20,6 +20,8 @@ namespace MvcProjectCamp
                     url: "{controller}/{action}/{id}",
                     defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional }
                 );
+              
+
             }
         }
     }

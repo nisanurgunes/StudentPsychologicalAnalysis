@@ -51,7 +51,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- /Fonts -->
     <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,400,400i,500,500i,700,700i,900" rel="stylesheet">
     <!-- //Fonts -->
+    <style>
+        .banü-logo {
+            width: 100px; /* Görselin genişliği */
+            height: 100px; /* Görselin yüksekliği */
+            border-radius: 50%; /* Yuvarlak köşeler */
+            margin-right: 20px; /* İsteğe bağlı: Görsel ile metin arasındaki boşluk */
+        }
 
+        /* İsteğe bağlı: Görsel ve metin hizalaması */
+        #word-mark h1 {
+            display: flex;
+            align-items: center;
+        }
+        #word-mark h1 {
+            margin-left: 10px;
+        }
+        #word-mark h3 {
+            margin-left: 5px; /* Görsel ile metin arasındaki boşluk */
+            color: white; /* Yazı rengi beyaz */
+            font-size: 2.2em; /* Yazı tipi büyüklüğü */
+        }
+
+            #word-mark h3 a {
+                color: white; /* Bağlantı yazısının rengi beyaz */
+                text-decoration: none; /* Bağlantı alt çizgisini kaldırma */
+            }
+    </style>
 </head>
 
 <body>
@@ -60,16 +86,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- nav -->
         <nav class="main-header d-flex">
             <div id="brand">
-                <div style="">
+                <div>
                     <a href="#home">
                         <i class="fav-icon"></i>
-
                     </a>
                 </div>
+                <div>
+                    <img src="~/AdminLTE-3.0.4/web/images/Banü-log.png" alt="BANÜ Logo" class="banü-logo">
+                </div>
                 <div id="word-mark">
-                    <h1>
+                    <h3>
                         <a href="#home"> BANÜ OKULU </a>
-                    </h1>
+                    </h3>
                 </div>
             </div>
             <div id="menu">
