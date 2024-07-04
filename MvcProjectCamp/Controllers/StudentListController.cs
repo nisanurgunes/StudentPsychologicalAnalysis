@@ -27,7 +27,7 @@ namespace MvcProjectCamp.Controllers
         [HttpPost]
         public ActionResult GetMatchingStudents()
         {
-            var teacherMail = User.Identity.Name; // Öğretmenin e-posta adresini al
+            var teacherMail = User.Identity.Name; 
             var teacherClass = tm.GetList().FirstOrDefault(t => t.TeacherMail == teacherMail)?.TeacherClass;
 
             if (teacherClass != null)

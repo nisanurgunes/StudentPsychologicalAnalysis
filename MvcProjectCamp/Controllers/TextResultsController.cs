@@ -14,7 +14,7 @@ namespace MvcProjectCamp.Controllers
         public TextResultsController()
         {
             _context = new Context();
-            _context.Configuration.LazyLoadingEnabled = false; // Lazy loading'i kapat
+            _context.Configuration.LazyLoadingEnabled = false; 
         }
 
         public ActionResult TextResults(string studentSearch = "", string studentClass = "", string selectedDate = "")
@@ -36,7 +36,7 @@ namespace MvcProjectCamp.Controllers
 
             ViewBag.SchoolClasses = schoolClasses;
 
-            // Öğrenci metinlerini al ve filtrele
+            
             var studentTexts = _context.StudentTexts.Include("Student").ToList();
 
             if (!string.IsNullOrEmpty(studentSearch))
@@ -60,12 +60,12 @@ namespace MvcProjectCamp.Controllers
                 }
                 else
                 {
-                    // Hatalı tarih formatı durumunda hata mesajı ekleyebilirsiniz
+                    
                     ModelState.AddModelError("selectedDate", "Geçersiz tarih formatı.");
                 }
             }
 
-            // Distinct dates
+            
             var dates = studentTexts.Select(st => st.StudentTextDate.Date).Distinct().OrderBy(date => date).ToList();
             var dateSelectList = dates.Select(date => new SelectListItem
             {

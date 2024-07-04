@@ -11,19 +11,19 @@ namespace DataAccessLayer.Concrete
 {
     public class GenericRepositoryDAL<T> : IRepositoryDAL<T> where T : class
     {
-          public Context db = new Context(); // sql bağlantı
-          public DbSet<T> _object; // obje tanımladık
+          public Context db = new Context();
+          public DbSet<T> _object; 
 
-        public GenericRepositoryDAL() // değer atamak için
+        public GenericRepositoryDAL() 
         {
             _object = db.Set<T>();
         }
         public void Delete(T t)
         {
-            var deletedEntity = db.Entry(t); // 1. yol
+            var deletedEntity = db.Entry(t); 
             deletedEntity.State = EntityState.Deleted;
 
-          //  _object.Remove(t); 2. yol
+          
             db.SaveChanges();
         }
 
@@ -34,10 +34,10 @@ namespace DataAccessLayer.Concrete
 
         public void Insert(T t)
         {
-            var addedEntity = db.Entry(t); // 1. yol
+            var addedEntity = db.Entry(t); 
             addedEntity.State = EntityState.Added;
 
-           // _object.Add(t); 2. yol
+           
             db.SaveChanges();
         }
 
@@ -53,10 +53,10 @@ namespace DataAccessLayer.Concrete
 
         public void Update(T t)
         {
-            var updatedEntity = db.Entry(t); // 1. yol
+            var updatedEntity = db.Entry(t); 
             updatedEntity.State = EntityState.Modified;
             
-            db.SaveChanges(); // 2. yol
+            db.SaveChanges(); 
         }
     }
 }

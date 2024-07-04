@@ -29,7 +29,7 @@ namespace MvcProjectCamp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddTeacher(Teacher p) //AddTeacher
+        public ActionResult AddTeacher(Teacher p) 
         {
             ValidationResult results = teacherValidator.Validate(p);
             if (results.IsValid)
@@ -46,7 +46,7 @@ namespace MvcProjectCamp.Controllers
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
-            // hiçbir şey yoksa view döndür
+            
             return View();
         }
         [HttpGet]

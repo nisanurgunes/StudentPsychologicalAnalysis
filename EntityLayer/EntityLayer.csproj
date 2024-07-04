@@ -61,7 +61,6 @@
     <Compile Include="Concrete\Content.cs" />
     <Compile Include="Concrete\Heading.cs" />
     <Compile Include="Concrete\Message.cs" />
-    <Compile Include="Concrete\Statistics.cs" />
     <Compile Include="Concrete\Student.cs" />
     <Compile Include="Concrete\StudentText.cs" />
     <Compile Include="Concrete\Teacher.cs" />

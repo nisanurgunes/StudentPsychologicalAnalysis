@@ -83,7 +83,6 @@ namespace MvcProjectCamp.Controllers
             var adminValue = adminmanager.GetByID(id);
             return View(adminValue);
         }
-
         [HttpPost]
         public ActionResult EditAdmin(Admin p)
         {

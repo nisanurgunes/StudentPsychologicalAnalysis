@@ -38,7 +38,7 @@ namespace MvcProjectCamp.Controllers
         {
             string p = (string)Session["TeacherMail"];
             var messagelist = mm.GetListSendbox(p);
-            return View(new Message()); // Boş bir Message nesnesi geçiriyoruz.
+            return View(new Message()); 
         }
 
         [HttpPost]
@@ -47,11 +47,11 @@ namespace MvcProjectCamp.Controllers
             ServicePointManager.ServerCertificateValidationCallback =
                 delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
                 {
-                    return true; // Sertifika doğrulamasını atlar
+                    return true; 
                 };
 
             MailMessage mailim = new MailMessage();
-            mailim.To.Add(ReceiverMail); // Kullanıcıdan alınan alıcı e-posta adresi
+            mailim.To.Add(ReceiverMail); 
             mailim.From = new MailAddress("banuokullari@gmail.com");
             mailim.Subject = "Değerli Velimiz sınav öncesi değerlendirme sonuçları: " + message.Subject;
             mailim.Body = "BANÜ OKULLARI " + message.MessageContent;

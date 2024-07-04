@@ -49,8 +49,6 @@ namespace MvcProjectCamp.Controllers
 
             return Json(students, JsonRequestBehavior.AllowGet);
         }
-
-
         [HttpGet]
         public ActionResult AddStudent()
         {
